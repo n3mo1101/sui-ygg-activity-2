@@ -353,12 +353,15 @@ module nft::nft_marketplace {
             price: _,
             seller: _,
         } = listing;
-        
+
         sui::event::emit(DelistNFTEvent {
             listing_id: object::uid_to_inner(&listing_id),
             nft_id,
         });
         
+        // Transfer nft back to the seller
+        // transfer::public_transfer(nft, seller));
+
         object::delete(listing_id);
     }
 
